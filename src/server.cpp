@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <iostream>
 #include <chrono>
+#include <string>
 
 /* sha1 hashing */
 #include <openssl/sha.h>
