@@ -39,23 +39,26 @@ size_t getUTF8strlen(const std::string& str){
 }
 
 std::string getSocketIp(uS::Socket * s, uWS::HttpRequest req) {
-	auto addr = s->getAddress();
-	switch (addr.family[3]) {
-		case '6':
-		case '4':
-			return addr.address;
-			break;
+// 	auto addr = s->getAddress();
+// 	switch (addr.family[3]) {
+// 		case '6':
+// 		case '4':
+// 			return addr.address;
+// 			break;
 
-#ifdef UWS_UDS
-		case 'X': {
-			uWS::Header h = req.getHeader("x-real-ip", 9);
-			return h ? h.toString() : "";
-		} break;
-#endif
-	}
+// #ifdef UWS_UDS
+// 		case 'X': {
+// 			uWS::Header h = req.getHeader("x-real-ip", 9);
+// 			return h ? h.toString() : "";
+// 		} break;
+// #endif
+// 	}
 
-	return "";
+// 	return "";
+	
+	return req.headers['x-forwarded-for'].substr(req.headers['x-forwarded-for'].find(",") + 1).replace('::ffff:', '');
 }
+
 
 std::string roundfloat(const float x, int prec){
 	std::stringstream ss;
