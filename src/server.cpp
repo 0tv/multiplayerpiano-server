@@ -55,7 +55,7 @@ std::string getSocketIp(uS::Socket * s, uWS::HttpRequest req) {
 // 	}
 
 // 	return "";
-	std::string forwardedip=req.headers['x-forwarded-for']
+	std::string forwardedip=req.headers['x-forwarded-for'];
 	return forwardedip.substr(forwardedip.find(",") + 1).replace('::ffff:', '\0');
 }
 
