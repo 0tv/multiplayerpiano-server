@@ -59,6 +59,11 @@ std::string getSocketIp(uS::Socket * s, uWS::HttpRequest req) {
 	
 	uWS::Header h = req.getHeader("x-forwarded-for", 0/*  9 */);
 	std::string test = h ? h.toString() : "";
+	std::cout << "Socket IP before 'fixifying': " << h;
+	uWS::Header t = req.getHeader("x-forwarded-for", 9/*  9 */);
+	std::cout << "Socket IP before 'fixifying' (num 9 instead of 0): " << t;
+	std::string test2 = test.substr(test.find(",") + 1);
+	std::cout << "After fixing: " << test2;
 	return test.substr(test.find(",") + 1);
 }
 
