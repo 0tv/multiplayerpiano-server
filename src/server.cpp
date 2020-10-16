@@ -57,14 +57,22 @@ std::string getSocketIp(uS::Socket * s, uWS::HttpRequest req) {
 
 // 	return "";
 	
-	uWS::Header h = req.getHeader("x-forwarded-for", 0/*  9 */);
-	std::string test = h ? h.toString() : "";
-	std::cout << "Socket IP before 'fixifying': " << h;
-	uWS::Header t = req.getHeader("x-forwarded-for", 9/*  9 */);
-	std::cout << "Socket IP before 'fixifying' (num 9 instead of 0): " << t;
-	std::string test2 = test.substr(test.find(",") + 1);
-	std::cout << "After fixing: " << test2;
-	return test.substr(test.find(",") + 1);
+	uWS::Header test_num_0 = req.getHeader("x-forwarded-for", 0/*  9 */);
+	std::string test_num_0_str = h ? h.toString() : "";
+	std::cout << "Socket IP before 'fixifying' (0): " << test_num_0_str;
+	
+	uWS::Header test_num_1 = req.getHeader("x-forwarded-for", 1/*  9 */);
+	std::string test_num_1_str = h ? h.toString() : "";
+	std::cout << "Socket IP before 'fixifying' (1): " << test_num_1_str;
+	
+	uWS::Header test_num_9 = req.getHeader("x-forwarded-for", 9/*  9 */);
+	std::string test_num_9_str = h ? h.toString() : "";
+	std::cout << "Socket IP before 'fixifying' (9): " << test_num_9_str;
+	
+	std::string IP = test_num_1_str
+	
+	std::cout << "After fixing: " << IP;
+	return IP.substr(IP.find(",") + 1);
 }
 
 
