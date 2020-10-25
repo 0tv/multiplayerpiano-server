@@ -41,7 +41,7 @@ size_t getUTF8strlen(const std::string& str){
 
 std::string gen_random(const int len) {
     
-    string tmp_s;
+    std::string tmp_s;
     static const char alphanum[] =
         "0123456789"
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
