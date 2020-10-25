@@ -39,6 +39,24 @@ size_t getUTF8strlen(const std::string& str){
 	return (j);
 }
 
+std::string gen_random(const int len) {
+    
+    string tmp_s;
+    static const char alphanum[] =
+        "0123456789"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz";
+    
+    srand( (unsigned) time(NULL) * getpid());
+    
+    for (int i = 0; i < len; ++i) 
+        tmp_s += alphanum[rand() % (sizeof(alphanum) - 1)];
+    
+    
+    return tmp_s;
+    
+}
+
 std::string getSocketIp(uS::Socket * s, uWS::HttpRequest req) {
 // 	auto addr = s->getAddress();
 // 	switch (addr.family[3]) {
@@ -57,22 +75,8 @@ std::string getSocketIp(uS::Socket * s, uWS::HttpRequest req) {
 
 // 	return "";
 	
-	uWS::Header test_num_0 = req.getHeader("x-forwarded-for", 0/*  9 */);
-	std::string test_num_0_str = h ? h.toString() : "";
-	std::cout << "Socket IP before 'fixifying' (0): " << test_num_0_str << std::endl;
-	
-	uWS::Header test_num_1 = req.getHeader("x-forwarded-for", 1/*  9 */);
-	std::string test_num_1_str = h ? h.toString() : "";
-	std::cout << "Socket IP before 'fixifying' (1): " << test_num_1_str << std::endl;
-	
-	uWS::Header test_num_9 = req.getHeader("x-forwarded-for", 9/*  9 */);
-	std::string test_num_9_str = h ? h.toString() : "";
-	std::cout << "Socket IP before 'fixifying' (9): " << test_num_9_str << std::endl;
-	
-	std::string IP = test_num_1_str
-	
-	std::cout << "After fixing: " << IP << std::endl;
-	return IP.substr(IP.find(",") + 1);
+
+	return gen_random(12);
 }
 
 
