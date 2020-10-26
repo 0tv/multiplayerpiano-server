@@ -32,5 +32,5 @@ class RoomLimit {
 public:
 	limiter::Simple curs;
 	limiter::Bucket chat;
-	RoomLimit() : curs(0.0000045f), chat(4000000, 5){};
+	RoomLimit() : curs(0.0000045f), chat(1000, 5){};
 };
