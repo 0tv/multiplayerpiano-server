@@ -72,7 +72,7 @@ void server::msg::a(server* sv, json& j, uWS::WebSocket<uWS::SERVER> * s){
 				res[0] = {
 					{"m", "a"},
 					{"a", j["message"].get<std::string>()},
-					{"p", j["p"] || search->second.user->get_json()},
+					{"p", search->second.user->get_json()},
 					{"t", js_date_now()}
 				};
 				res[0]["p"]["id"] = usr->id;
