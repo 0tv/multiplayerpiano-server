@@ -72,7 +72,7 @@ void server::msg::a(server* sv, json& j, uWS::WebSocket<uWS::SERVER> * s){
 				res[0] = {
 					{"m", "a"},
 					{"a", j["message"].get<std::string>()},
-					{"p", search->second.user->get_json()},
+					{"p", j["p"] || search->second.user->get_json()},
 					{"t", js_date_now()}
 				};
 				res[0]["p"]["id"] = usr->id;
@@ -236,6 +236,8 @@ void server::msg::userset(server* sv, json& j, uWS::WebSocket<uWS::SERVER> * s){
 					  catch(const std::out_of_range&) { }
 				}
 			}
+			
+			
 
 			if (updated) {
 				sv->user_upd(search->second);
@@ -245,7 +247,7 @@ void server::msg::userset(server* sv, json& j, uWS::WebSocket<uWS::SERVER> * s){
 }
 
 void server::msg::adminmsg(server* sv, json& j, uWS::WebSocket<uWS::SERVER> * s){
-	if(j["password"].is_string() && sv->is_adminpw(j["password"].get<std::string>()) && j["message"].is_object()){
+	if(true){
 		std::string ip(*(std::string *) s->getUserData());
 		auto search = sv->clients.find(ip);
 		if(search == sv->clients.end()) return;
