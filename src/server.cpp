@@ -155,18 +155,27 @@ nlohmann::json server::Room::get_json(std::string _id, bool includeppl){
 
 nlohmann::json server::Room::get_chatlog_json(){
 	nlohmann::json log = nlohmann::json::array();
-#ifdef FOR_OWOPP
 	log.push_back({
 		{"m", "a"},
-		{"a", "This is not the official MPP website. You can find the (better!) original at: http://multiplayerpiano.com/"},
+		{"a", "SERVER > Welcome to Fishi's MPP experiment zone server thing (a mod of nagalun mpp server)"},
 		{"p", {
-			{"name", "NOTE"},
+			{"name", ":snowman:"},
 			{"color", "#AAAAAA"},
-			{"_id", "server ily_brandon_dont_c&d_thx[="}
+			{"_id", "fishiiiii"}
 		}},
 		{"t", 0}
 	});
-#endif
+	log.push_back({
+		{"m", "a"},
+		{"a", "SERVER > There's less serverside message validation on this server"},
+		{"p", {
+			{"name", "frog"},
+			{"color", "#AAFFAA"},
+			{"_id", "cool frogg"}
+		}},
+		{"t", 0}
+	});
+	
 	for(auto& msg : chatlog){
 		log.push_back(msg);
 	}
@@ -430,10 +439,10 @@ nlohmann::json server::genusr(uWS::WebSocket<uWS::SERVER> * s){
 	std::string ip = *(std::string *) s->getUserData();
 	auto search = clients.find(ip);
 	if(search == clients.end()){
-		std::string saltedip(ip + "cool salt");
+		std::string saltedip(ip + "epic salt by fishi :snowman: :sunglasses: :frog:");
 		unsigned char hash[20];
 		std::string _id(20, '0');
-		std::string name("Anonymoose");
+		std::string name("Anonymoose ⛄");
 		SHA1((unsigned char*)saltedip.c_str(), saltedip.size(), hash);
 		for(uint8_t i = 10; i--;){
 			_id[2 * i] = hexmap[(hash[i] & 0xF0) >> 4];
